@@ -62,6 +62,19 @@ var spotifySong = function() {
 			}
 		});
 	}
+} else {
+	spotify.search({ type: 'track', query: search }, function(error, data) {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log (
+					"\nArtist: " + data.tracks.items[0].artist[0].name +
+					"\nTitle: " + data.tracks.items[0].name +
+					"\nPreview Link: " + data.tracks.items[0].preview_url +
+					"\nAlbum: " + data.tracks.items[0].album.name;
+					)
+		}
+	});
 };
 
 var movies = function() {
@@ -73,13 +86,36 @@ var movies = function() {
 			}
 			else {
 				console.log(
-
+					"\nTitle: " + data.Title +
+					"\n\nRelease Year: " + data.Year +
+					"\n\nIMDB Rating: " + data.imdbRating +
+					"\n\nRotten Tomatoes Rating: " + data.Ratings[1].Value +
+					"\n\nCountry: " + data.Country +
+					"\n\nLanguage: " + data.Actors +
+					"\n\nPlot: " + data.Plot;
 					)
 			}
-		})
+		});
+	} else {
+		var queryURL = "http://www.omdbapi.com/?apikey=40e9cece&t=" + search;
+		request(queryURL, function(error, response, body) {
+			if (error) {
+				console.log(error);
+			}
+			else {
+				console.log(
+					"\nTitle: " + data.Title +
+					"\n\nRelease Year: " + data.Year +
+					"\n\nIMDB Rating: " + data.imdbRating +
+					"\n\nRotten Tomatoes Rating: " + data.Ratings[1].Value +
+					"\n\nCountry: " + data.Country +
+					"\n\nLanguage: " + data.Actors +
+					"\n\nPlot: " + data.Plot;
+					)
+			}
+		});
 	}
-
-}
+};
 
 var whatItSay = function() {
 
